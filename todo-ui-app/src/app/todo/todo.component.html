@@ -1,18 +1,18 @@
-<div class="container">
+<div @fadeIn class="container">
     <div class="row">
-        <div class="col-12 text-center">
-            <h3 class="modal-header text-center"> Create a ToDO</h3>
+        <div class="col-6 align-items-center ">
+            <h2 id="header" class="modal-header text-center p-2">Create a ToDO</h2>
         </div>
         <div class="col-12">
             <p class="d-flex flex-column flex-grow-1 py-4">
                 <mat-form-field>
                     <mat-label>Title</mat-label>
-                    <input matInput name="title" [(ngModel)]="title" [value]="title">
+                    <input matInput name="title" [(ngModel)]="title" [value]="title" required maxlength="15">
                 </mat-form-field>
                 <br>
                 <mat-form-field>
                     <mat-label>Description</mat-label>
-                    <input matInput name="description" [(ngModel)]="description" [value]="description">
+                    <textarea matInput name="description" [(ngModel)]="description" [value]="description" required></textarea>
                 </mat-form-field>
             </p>
         </div>

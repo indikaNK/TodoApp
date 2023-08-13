@@ -3,11 +3,24 @@ import {MatSelectChange} from "@angular/material/select";
 import {ApiService} from "../services/api.service";
 import {MatDialog} from "@angular/material/dialog";
 import {TodoComponent} from "../todo/todo.component";
+import {animate, style, transition, trigger} from "@angular/animations";
+
+//define animation
+const enterTransition = transition(':enter',[
+    style({
+        opacity:0
+    }),
+    animate('1s ease-in',style({opacity:1}))
+]);
+const fadeIn = trigger('fadeIn',[enterTransition])
+
+// @ts-ignore
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+    styleUrls: ['./home.component.scss'],
+
 })
 export class HomeComponent {
 

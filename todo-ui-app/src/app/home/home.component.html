@@ -1,11 +1,11 @@
-<div class="container py-4">
+<div  class="container py-4">
     <div class="row text-center">
-        <div class="col-6 px-1 ">
-            <button mat-raised-button color="accent" (click)="openDialog()">CREATE NEW TODO
+        <div class="col-2 align-items-end">
+            <button mat-raised-button color="accent" (click)="openDialog()" style="padding: 1.7rem ">CREATE NEW TODO
             <mat-icon>create</mat-icon>
             </button>
         </div>
-        <div class="col-6">
+        <div class="col-2 align-items-end">
             <mat-form-field>
                 <mat-label>Filter By Status</mat-label>
                     <mat-select (selectionChange)="filterChanged($event)">
