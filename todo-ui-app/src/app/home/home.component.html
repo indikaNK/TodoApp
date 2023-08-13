@@ -1,1 +1,49 @@
-<p>home works!</p>
+<div class="container py-4">
+    <div class="row text-center">
+        <div class="col-6 px-1 ">
+            <button mat-raised-button color="accent">CREATE TODO</button>
+        </div>
+        <div class="col-6">
+            <mat-form-field>
+                <mat-label>Filter By Status</mat-label>
+                    <mat-select (selectionChange)="filterChanged($event)">
+
+                    <mat-option value="OPEN">OPEN</mat-option>
+                    <mat-option value="WIP">In Progress</mat-option>
+                    <mat-option value="COMPLETED">Completed</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6"></div>
+<!--        display the list of todos via a ngContainer-->
+        <ng-container *ngFor="let todo of filteredTodos; let i = index " >
+            <mat-card class="my-3">
+                <mat-card-title class="p-2 text-dark">{{todo.title}}</mat-card-title>
+                <mat-card-content class="p-2 text-primary d-flex flex-column">
+                    <div>
+                        <p class="lead">{{todo.description}}</p>
+                    </div>
+                    <div>
+                        <div class="col-6">
+                            <mat-form-field>
+                                <mat-label>Select a status</mat-label>
+                                <mat-select [(value)]="todo.status" (selectionChange)="statusChanged($event, todo.id,i)">
+
+                                    <mat-option value="OPEN">OPEN</mat-option>
+                                    <mat-option value="WIP">In Progress</mat-option>
+                                    <mat-option value="COMPLETED">Completed</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
+    </div>
+</div>

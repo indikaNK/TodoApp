@@ -1,1 +1,12 @@
-<app-home></app-home>
+<mat-toolbar color="primary">
+  <div class="container d-flex">
+    <span routerLink="/" style="cursor: pointer">ToDo Maker</span>
+  </div>
+  <span class="spacer"></span>
+  <div class="d-flex justify-content-around icons " style="width: 100px"></div>
+
+
+</mat-toolbar>
+<div class="py-3">
+  <router-outlet></router-outlet>
+</div>
