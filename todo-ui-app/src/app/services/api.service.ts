@@ -38,4 +38,13 @@ export class ApiService {
         })
     )
   }
+
+  //call create to do api service
+    createTodo(title:string, description:string) {
+        return this.http.post(`${this.API_URL}/todo` , {title ,description})
+    }
+
+    deleteTodo(id: number) {
+        return this.http.delete(`${this.API_URL}/todo/${id}`)
+    }
 }

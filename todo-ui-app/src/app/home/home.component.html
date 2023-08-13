@@ -1,7 +1,9 @@
 <div class="container py-4">
     <div class="row text-center">
         <div class="col-6 px-1 ">
-            <button mat-raised-button color="accent">CREATE TODO</button>
+            <button mat-raised-button color="accent" (click)="openDialog()">CREATE NEW TODO
+            <mat-icon>create</mat-icon>
+            </button>
         </div>
         <div class="col-6">
             <mat-form-field>
@@ -38,7 +40,12 @@
                                     <mat-option value="COMPLETED">Completed</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                            <span class="spacer m-3">
+                                <mat-icon color="warn" style="cursor:pointer;" (click)="delete(todo.id)">delete</mat-icon>
+                            </span>
+                            <div>
 
+                        </div>
                         </div>
 
                     </div>

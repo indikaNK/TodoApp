@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {MatSelectChange} from "@angular/material/select";
 import {ApiService} from "../services/api.service";
+import {MatDialog} from "@angular/material/dialog";
+import {TodoComponent} from "../todo/todo.component";
 
 @Component({
     selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomeComponent {
     filteredTodos: any[] = [];
 
     //constructor will call the api services to load the values from API
-    constructor(private apiServices: ApiService) {
+    constructor(private apiServices: ApiService, private dialog: MatDialog) {
 
     }
 
@@ -46,9 +48,6 @@ export class HomeComponent {
 
     }
 
-    //dialog
-
-
     statusChanged(ev: MatSelectChange, todoId:number, index: number) {
         //call the update status API
         const value = ev.value;
@@ -56,4 +55,41 @@ export class HomeComponent {
 
         this.apiServices.updateStatus(value,todoId).subscribe();
     }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(TodoComponent, {
+            width: '500px',
+            hasBackdrop: true,
+            role: 'dialog',
+            height: '500px'
+        });
+
+        //after dialog closed (submit button clicked) if close method contains values this function gets executed to call the create API
+        dialogRef.afterClosed().subscribe(data => {
+            this.apiServices.createTodo(data.title, data.description).subscribe((result: any) => {
+                console.log(result);
+                this.todos.push(result);
+                this.filteredTodos = this.todos;
+            });
+        });
+    }
+
+    // @ts-ignore
+    delete(id:number) {
+        //confirmation
+        if(confirm("Do you want to delete the todo ?")){
+            return this.apiServices.deleteTodo(id).subscribe((result:any)=>{
+                if(result.success){
+                    console.log(result);
+                    //remove todo from list
+                    //filter returns list of matching values in a new array. we pass the condition like if the deleted id not in then return it to us
+                    this.todos = this.todos.filter((t:any)=> t.id !== id)
+                    this.filteredTodos = this.todos
+
+                }
+            });
+        }
+
+    }
 }
+
